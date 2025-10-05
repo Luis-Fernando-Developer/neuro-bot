@@ -1,9 +1,9 @@
 import React from "react";
 import { Handle, Position } from "reactflow";
 import type { NodeProps } from "reactflow";
-import { MessageSquare } from "lucide-react";
+import {  Headphones } from "lucide-react";
 
-const TextNode: React.FC<NodeProps> = ({ data }: NodeProps) => {
+const AudioNode: React.FC<NodeProps> = ({ data }: NodeProps) => {
   return (
     <div className="py-2 px-3 items-center border border-black rounded bg-cyan-950 shadow">
       <Handle 
@@ -13,11 +13,11 @@ const TextNode: React.FC<NodeProps> = ({ data }: NodeProps) => {
       />
       <div className="text-lg flex flex-col w-full gap-1 items-center justify-center">
         <div className="flex w-full rounded-sm border border-gray-200/30 pl-1 gap-2 items-center justify-start">
-          <MessageSquare className="w-4 h-4 text-blue-500" />
+          <Headphones className="w-4 h-4 text-blue-500" />
           <p className='text-sm text-white font-semibold'>{data.label}</p>
         </div>
           <div className='border border-gray-200/30 rounded-sm p-1'>
-            Text message node
+            Audio message node
           </div>
       </div>
       <Handle 
@@ -29,4 +29,4 @@ const TextNode: React.FC<NodeProps> = ({ data }: NodeProps) => {
   );
 };
 
-export default TextNode;
+export default AudioNode;

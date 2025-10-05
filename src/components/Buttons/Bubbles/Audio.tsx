@@ -1,20 +1,20 @@
 import React from 'react';
 import  type { Node } from 'reactflow';
 
-interface ButtonTextProps {
+interface ButtonAudioProps {
   addNode: (node: Node) => void;
   className?: string;
   children?: React.ReactNode;
 }
 
-const TextButton: React.FC<ButtonTextProps> = ({ addNode, className, children }:ButtonTextProps ) => {
+const AudioButton: React.FC<ButtonAudioProps> = ({ addNode, className, children }: ButtonAudioProps) => {
   const handleAddNode = () => {
     const id = (Math.random() * 1000).toFixed(0);
     addNode({
       id,
-      type: 'textNode',
+      type: 'AudioNode',
       position: { x: 250, y: 5 },
-      data: { label: 'Text Node' },
+      data: { label: 'Audio Node' },
     });
   };
   return (
@@ -23,4 +23,4 @@ const TextButton: React.FC<ButtonTextProps> = ({ addNode, className, children }:
     </button>
   );
 };
-export default TextButton;
+export default AudioButton;

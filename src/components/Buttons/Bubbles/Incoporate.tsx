@@ -1,20 +1,20 @@
 import React from 'react';
 import  type { Node } from 'reactflow';
 
-interface ButtonTextProps {
+interface ButtonIncorporateProps {
   addNode: (node: Node) => void;
   className?: string;
   children?: React.ReactNode;
 }
 
-const TextButton: React.FC<ButtonTextProps> = ({ addNode, className, children }:ButtonTextProps ) => {
+const IncorporateButton: React.FC<ButtonIncorporateProps> = ({ addNode, className, children }: ButtonIncorporateProps) => {
   const handleAddNode = () => {
     const id = (Math.random() * 1000).toFixed(0);
     addNode({
       id,
-      type: 'textNode',
+      type: 'IncorporateNode',
       position: { x: 250, y: 5 },
-      data: { label: 'Text Node' },
+      data: { label: 'Incorporate Node' },
     });
   };
   return (
@@ -23,4 +23,4 @@ const TextButton: React.FC<ButtonTextProps> = ({ addNode, className, children }:
     </button>
   );
 };
-export default TextButton;
+export default IncorporateButton;
