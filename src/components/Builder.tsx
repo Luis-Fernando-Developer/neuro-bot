@@ -5,10 +5,11 @@ import ReactFlow, {
 	MiniMap,
 	Controls,
 	Background,
-	applyNodeChanges,
+	// applyNodeChanges,
 	applyEdgeChanges,
+	useNodesState,
 } from "reactflow";
-import type {Edge, Node, Connection, NodeChange, EdgeChange} from "@reactflow/core";
+import type {Edge, Node, Connection,  EdgeChange} from "@reactflow/core";
 import "reactflow/dist/style.css";
 import TextNode from "./Blocks/Nodes/Bubbles/TextNode";
 import NumberNode from "./Blocks/Nodes/Bubbles/NumberNode";
@@ -23,8 +24,8 @@ import InputImageNode from "./Blocks/Nodes/Inputs/InputImageNode";
 import InputMailNode from "./Blocks/Nodes/Inputs/InputEmailNode";
 import InputPhoneNode from "./Blocks/Nodes/Inputs/InputPhoneNode";
 
-const initialNodes: Node[] = [];
-const initialEdges: Edge[] = [];
+// const initialNodes: Node[] = [];
+// const initialEdges: Edge[] = [];
 
 interface BuilderProps {
 	className?: string;
@@ -32,8 +33,8 @@ interface BuilderProps {
 };
 
 const Builder = ({ className, onSetHandler }: BuilderProps) => {
-	const [nodes, setNodes] = useState<Node[]>(initialNodes);
-	const [edges, setEdges] = useState<Edge[]>(initialEdges);
+	const [nodes, setNodes, onNodesChange] = useNodesState<Node[]>([]);
+	const [edges, setEdges] = useState<Edge[]>([]);
 
 	const addNode = (node: Node) => {
 		setNodes((nds) => [...nds, node]);
@@ -44,15 +45,24 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 		[]
 	);
 
-	const onNodesChange = useCallback(
-		(changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
-		[]
-	);
+	// const onNodesChange = useCallback(
+	// 	(changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
+	// 	[]
+	// );
 
 	const onEdgesChange = useCallback(
 		(changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
 		[]
 	);
+
+	const handleNodesChange = (id: string, newData: any) => {
+		setNodes((nds) =>
+			nds.map((node) =>
+				node.id === id ? {...node, data: {...node.data, ...newData}}
+				: node
+			) 
+		);
+	};
 
 	const nodeTypes = {
 		textNode: TextNode,
@@ -91,23 +101,11 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 					: "inputImage",
 			position: { x: Math.random() * 400 + 100, y: Math.random() * 300 + 50 },
 			data: {
-				label:
-					type === "text" ? "Texto"
-						: type === "number" ? "Número"
-						: type === "audio" ? "Áudio"
-						: type === "image" ? "Imagem"
-						: type === "video" ? "Vídeo"
-						: type === "document" ? "Documento"
-						: type === "incorporate" ? "Incorporar"
-						: type === "inputText" ? "Texto"
-						: type === "inputNumber" ? "Número"
-						: type === "inputMail" ? "inputMailNode"
-						: type === "inputPhone" ? "inputPhoneNode"
-						// : "inputTextNode",
-						: "inputImage",
+				label: type,
+				onchange: handleNodesChange,
 			},
 		};
-		addNode(newNode);
+		setNodes((nds) => [...nds, newNode]);
 	};
 
 	React.useEffect(() => {
