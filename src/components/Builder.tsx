@@ -10,12 +10,18 @@ import ReactFlow, {
 } from "reactflow";
 import type {Edge, Node, Connection, NodeChange, EdgeChange} from "@reactflow/core";
 import "reactflow/dist/style.css";
-import TextNode from "./Blocks/Nodes/TextNode";
-import NumberNode from "./Blocks/Nodes/NumberNode";
-import IncorporateNode from "./Blocks/Nodes/IncorporateNode";
-import AudioNode from "./Blocks/Nodes/AudioNode";
-import ImageNode from "./Blocks/Nodes/ImageNode";
-import VideoNode from "./Blocks/Nodes/VideoNode";
+import TextNode from "./Blocks/Nodes/Bubbles/TextNode";
+import NumberNode from "./Blocks/Nodes/Bubbles/NumberNode";
+import IncorporateNode from "./Blocks/Nodes/Bubbles/IncorporateNode";
+import AudioNode from "./Blocks/Nodes/Bubbles/AudioNode";
+import ImageNode from "./Blocks/Nodes/Bubbles/ImageNode";
+import VideoNode from "./Blocks/Nodes/Bubbles/VideoNode";
+import InputTextNode from "./Blocks/Nodes/Inputs/InputTextNode";
+import DocumentNode from "./Blocks/Nodes/Bubbles/DocumentNode";
+import InputNumberNode from "./Blocks/Nodes/Inputs/InputNumberNode";
+import InputImageNode from "./Blocks/Nodes/Inputs/InputImageNode";
+import InputMailNode from "./Blocks/Nodes/Inputs/InputEmailNode";
+import InputPhoneNode from "./Blocks/Nodes/Inputs/InputPhoneNode";
 
 const initialNodes: Node[] = [];
 const initialEdges: Edge[] = [];
@@ -54,7 +60,14 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 		videoNode: VideoNode,
 		imageNode: ImageNode,
 		audioNode: AudioNode,
+		documentNode: DocumentNode,
 		incorporateNode: IncorporateNode,
+
+		inputTextNode: InputTextNode,
+		inputNumberNode: InputNumberNode,
+		inputMailNode: InputMailNode,
+		inputPhoneNode: InputPhoneNode,
+		inputImageNode: InputImageNode,
 	};
 
 	const handleAddNode =  (type: string) => {
@@ -62,31 +75,36 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 		const newNode: Node = {
 			id,
 			type:
-				type === "text"
-					? "textNode"
-					: type === "number"
-					? "numberNode"
-					: type === "audio"
-					? "audioNode"
-					: type === "image"
-					? "imageNode"
-					: type === "video"
-					? "videoNode"
-					: "incorporateNode",
+				type === "text" ? "textNode"
+					: type === "number" ? "numberNode"
+					: type === "audio" ? "audioNode"
+					: type === "image" ? "imageNode"
+					: type === "video" ? "videoNode"
+					: type === "document" ? "documentNode"
+					: type === "incorporate" ? "incorporateNode"
+					: type === "inputText" ? "inputTextNode"
+					: type === "inputNumber" ? "inputNumberNode"
+					: type === "inputMail" ? "inputMailNode"
+					: type === "inputPhone" ? "inputPhoneNode"
+
+					// : "InputImage",
+					: "inputImage",
 			position: { x: Math.random() * 400 + 100, y: Math.random() * 300 + 50 },
 			data: {
 				label:
-					type === "text"
-						? "textNode"
-						: type === "number"
-						? "numberNode"
-						: type === "audio"
-						? "audioNode"
-						: type === "image"
-						? "imageNode"
-						: type === "video"
-						? "videoNode"
-						: "incorporateNode",
+					type === "text" ? "Texto"
+						: type === "number" ? "Número"
+						: type === "audio" ? "Áudio"
+						: type === "image" ? "Imagem"
+						: type === "video" ? "Vídeo"
+						: type === "document" ? "Documento"
+						: type === "incorporate" ? "Incorporar"
+						: type === "inputText" ? "Texto"
+						: type === "inputNumber" ? "Número"
+						: type === "inputMail" ? "inputMailNode"
+						: type === "inputPhone" ? "inputPhoneNode"
+						// : "inputTextNode",
+						: "inputImage",
 			},
 		};
 		addNode(newNode);
