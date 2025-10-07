@@ -24,8 +24,6 @@ import InputImageNode from "./Blocks/Nodes/Inputs/InputImageNode";
 import InputMailNode from "./Blocks/Nodes/Inputs/InputEmailNode";
 import InputPhoneNode from "./Blocks/Nodes/Inputs/InputPhoneNode";
 
-// const initialNodes: Node[] = [];
-// const initialEdges: Edge[] = [];
 
 interface BuilderProps {
 	className?: string;
@@ -36,19 +34,12 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 	const [nodes, setNodes, onNodesChange] = useNodesState<Node[]>([]);
 	const [edges, setEdges] = useState<Edge[]>([]);
 
-	const addNode = (node: Node) => {
-		setNodes((nds) => [...nds, node]);
-	};
 
 	const onConnect = useCallback(
 		(params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
 		[]
 	);
 
-	// const onNodesChange = useCallback(
-	// 	(changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
-	// 	[]
-	// );
 
 	const onEdgesChange = useCallback(
 		(changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
@@ -64,7 +55,8 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 		);
 	};
 
-	const nodeTypes = {
+	const nodeTypes = React.useMemo(() => ({
+
 		textNode: TextNode,
 		numberNode: NumberNode,
 		videoNode: VideoNode,
@@ -78,7 +70,7 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 		inputMailNode: InputMailNode,
 		inputPhoneNode: InputPhoneNode,
 		inputImageNode: InputImageNode,
-	};
+	}), []);
 
 	const handleAddNode =  (type: string) => {
 		const id = `${type}-${Date.now()}`;
