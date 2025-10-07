@@ -14,7 +14,6 @@ const TextNode: React.FC<NodeProps> = ({ id, data, selected }: NodeProps) => {
 	const [text, setText] = useState(data.message || "");
 
 	const handleDuplicate = () => data.onDuplicate?.(id);
-	// const handleDelete = () => data.OnDelete?.(id);
 	const handleTest = () => data.onTest?.(id);
 
 	const saveText = () => {
@@ -25,7 +24,6 @@ const TextNode: React.FC<NodeProps> = ({ id, data, selected }: NodeProps) => {
 
 	return (
 		<Card
-			// onFocus={toggleMenu}
 			className={` ${
 				selected ? "border border-blue-600" : "border border-red-600"
 			} relative flex flex-col min-w-[170px] max-w-[170px] border-0 rounded-sm space-x-0 space-y-0 gap-2 py-2.5 px-3.5 items-center bg-gray-800 shadow-accent`}
@@ -103,18 +101,8 @@ const TextNode: React.FC<NodeProps> = ({ id, data, selected }: NodeProps) => {
 						onClick={() => setEditing}
 						placeholder="Digite algo..."
 					/>
-					// <Input className="w-full justify-start text-left" aria-placeholder="digite algo"
-					// onClick={() => (handleClick(), setEditing(true))}>{text} ></Input>
 				)}
 			</CardContent>
-
-			{/* <CardContent className="p-0 gap-0 space-x-0 space-y-0 flex w-full">
-				<div className="text-lg flex flex-col w-full items-center justify-center">
-					<div className="border border-gray-400/20 rounded-sm w-full">
-						<Button className="p-0 w-full">Texto</Button>
-					</div>
-				</div>
-			</CardContent> */}
 		</Card>
 	);
 };

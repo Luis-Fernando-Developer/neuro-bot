@@ -35,14 +35,6 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 	const [edges, setEdges] = useState<Edge[]>([]);
 
 
-	// let positionNode = 0;
-	// let stepPosition = 5;
-
-	// function movePosition() {
-	// 	positionNode += stepPosition ;
-	// 	return positionNode;
-	// }
-
 	const nodeTypes = React.useMemo(
 		() => ({
 			textNode: TextNode,
@@ -70,46 +62,55 @@ const Builder = ({ className, onSetHandler }: BuilderProps) => {
 	}, []);
 
 	const handleDelete = useCallback(
-		(id: string) => {
-			setNodes((nds) => nds.filter((n) => n.id !== id));
-			setEdges((eds) => eds.filter((e) => e.source !== id && e.target !== id));
+		(id: string ) => {
+			//deleta node e filho (caso seja container)
+			const idsToDelete = [
+				id,
+				...nodes.filter((n) => n.parentNode === id).map((n) => n.id),
+			]
+			setNodes((nds) => nds.filter((n) => !idsToDelete.includes(n.id)))
+			setEdges((eds) =>
+				eds.filter(
+					(e) =>
+							!idsToDelete.includes(e.source) && !idsToDelete.includes(e.target)
+				)
+			);
 		},
-		[setNodes, setEdges]
+		[nodes]
+		// (id: string) => {
+		// 	setNodes((nds) => nds.filter((n) => n.id !== id));
+		// 	setEdges((eds) => eds.filter((e) => e.source !== id && e.target !== id));
+		// },
+		// [setNodes, setEdges]
 	);
 
-	const handleDuplicate = useCallback((id: string) => {
-		setNodes((nds) => {
-			const node = nds.find((n) => n.id === id);
-			if (!node) return nds;
+	const handleDuplicate = useCallback(
+		(id: string) => {
+			const node = nodes.find((n) => n.id === id);
+			if (!node) return;
+			console.log(node)
 
-			const newNode: Node = {
+			const newId = `${id}-copy-${Date.now()}`;
+			const duplicateNode: Node = {
 				...node,
-				id: `${id}-copy-${Date.now()}`,
-				position: { x: Math.random() * 99 + 8, y: Math.random() * 99 + 8 },
+				id: newId,
+				position: {
+					x: node.position.x + 20,
+					y: node.position.y + 20,
+				},
+				data: {
+					...node.data,
+					onChange: handleNodesChange,
+					onDelete: handleDelete,
+					onDuplicate: handleDuplicate,
+				},
 			};
+			setNodes((nds) => [...nds, duplicateNode]);
+		},
+		[nodes, handleNodesChange,  handleDelete]
+	);
 
-			//repassar handlers pro clone
-			newNode.data = {
-				...node.data,
-				onchange: handleNodesChange,
-				onDuplicate: handleDuplicate,
-				onDelete: handleDelete,
-			};
 
-			return [...nds, newNode];
-		});
-	}, []);
-
-	// const handleNodesChange = useCallback(
-	// 	(id: string, newData: any) => {
-	// 		setNodes((nds) =>
-	// 			nds.map((node) =>
-	// 				node.id === id ? {...node, data: {...node.data, ...newData}} : node
-	// 		)
-	// 	);
-	// },
-	// [setNodes]
-	// };
 
 	const handleAddNode = useCallback(
 		(type: string) => {
