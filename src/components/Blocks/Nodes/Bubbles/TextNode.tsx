@@ -14,7 +14,7 @@ const TextNode: React.FC<NodeProps> = ({ id, data, selected }: NodeProps) => {
 	const [text, setText] = useState(data.message || "");
 
 	const handleDuplicate = () => data.onDuplicate?.(id);
-	const handleDelete = () => data.OnDelete?.(id);
+	// const handleDelete = () => data.OnDelete?.(id);
 	const handleTest = () => data.onTest?.(id);
 
 	const saveText = () => {
@@ -67,7 +67,7 @@ const TextNode: React.FC<NodeProps> = ({ id, data, selected }: NodeProps) => {
 						<Button
 							onClick={(e) => {
 								e.stopPropagation();
-								handleDelete();
+								data.onDelete?.(id);
 							}}
 							className="text-red-400 h-full rounded-sm"
 						>

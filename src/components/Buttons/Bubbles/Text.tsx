@@ -13,7 +13,7 @@ const TextButton: React.FC<ButtonTextProps> = ({ addNode, className, children }:
     addNode({
       id,
       type: 'textNode',
-      position: { x: 250, y: 5 },
+      position: { x: Math.random() * 600 + 80, y: Math.random() * 600 * 80 },
       data: { label: 'Text Node' },
     });
   };
