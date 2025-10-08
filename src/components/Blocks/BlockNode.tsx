@@ -1,24 +1,35 @@
 import React from "react";
 import { Handle, Position, type Node } from "reactflow";
+import { Button } from "../ui/button";
+import { Copy, Trash2 } from "lucide-react";
 
 type NodeBlockDataProps = {
  id: string;
- data: any;
- children: React.ReactNode[];
  label: string;
+ children: React.ReactNode[];
+ addNode?: (type: string, parentNode?: string) => void;
+ deleteNode?: (id: string) => void;
+ duplicateNode?: (id: string) => void;
 };
 
-type BlockNodeProps = Node<NodeBlockDataProps>
+type BlockNodeProps = Node<NodeBlockDataProps> & {
+ allNodes: Node<any>[];
+};
 
-const BlockNode = ({id, data}: BlockNodeProps ) => {
+const BlockNode = ({id, data, allNodes}: BlockNodeProps ) => {
 	const handleDrop = (event: React.DragEvent) => {
 		event.preventDefault();
-		event.dataTransfer.setData("targetBlockId", id);
+  const type = event.dataTransfer.getData("nodeType");
+		if (data.addNode && type) {
+   data.addNode(type, id);
+  }
 	};
 
 	const handleDragOver = (event: React.DragEvent) => {
 		event.preventDefault();
 	};
+
+ const childNodes = allNodes.filter(n => n.parentNode === id);
 
 	return (
 		<div
@@ -26,11 +37,23 @@ const BlockNode = ({id, data}: BlockNodeProps ) => {
 			onDrop={handleDrop}
 			onDrag={handleDragOver}
 		>
-			<h3>{data.label || `Block #${id}`}</h3>
 			<div>
-				{data.children?.map((child: any) => (
+				{data.duplicateNode && (
+					<Button onClick={() => data.duplicateNode(id)} className="">
+						<Copy />
+					</Button>
+				)}
+				{data.deleteNode && (
+					<Button onClick={() => data.deleteNode(id)} className="">
+						<Trash2 />
+					</Button>
+				)}
+			</div>
+
+			<div>
+				{childNodes.map((child: any) => (
 					<div key={child.id} className="p-2 bg-white rounded-md border shadow-sm">
-						{child.type === "text" && <p>Text node</p>}
+						{child.type === "textNode" && <p>Text node</p>}
 						{child.type === "number" && <p>Text node</p>}
 					</div>
 				))}

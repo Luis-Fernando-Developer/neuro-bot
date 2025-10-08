@@ -1,4 +1,4 @@
-import { AtSign, CalendarArrowUp, ChevronLeft, ChevronRight, Code, CreditCard, FileDown, FileUp, Film, Globe, Hash, HashIcon, Headphones, Image, Mail, MessageSquare, Phone, SquareCheckBig, StarIcon, Type } from "lucide-react";
+import { AtSign, CalendarArrowUp, ChevronLeft, ChevronRight, Code, CreditCard, FileDown, FileUp, Film, Globe, Hash, HashIcon, Headphones, Image,  Phone, SquareCheckBig, StarIcon, Type } from "lucide-react";
 import { useState } from "react"
 
 interface SidebarProps {
@@ -54,7 +54,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 							>
 								{/* Button Text */}
 								<button
-									onClick={() => onAddNode("text")}
+									onClick={() => onAddNode?.("textNode")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -76,7 +76,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 								</button>
 								{/* Button Number */}
 								<button
-									onClick={() => onAddNode("number")}
+									onClick={() => onAddNode?.("number")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -102,7 +102,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 								</button>
 								{/* Button Audio */}
 								<button
-									onClick={() => onAddNode("audio")}
+									onClick={() => onAddNode?.("audio")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -128,7 +128,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 								</button>
 								{/* Button Image */}
 								<button
-									onClick={() => onAddNode("image")}
+									onClick={() => onAddNode?.("image")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -154,7 +154,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 								</button>
 								{/* Button Video */}
 								<button
-									onClick={() => onAddNode("video")}
+									onClick={() => onAddNode?.("video")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -180,7 +180,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 								</button>
 								{/* Button Document */}
 								<button
-									onClick={() => onAddNode("document")}
+									onClick={() => onAddNode?.("document")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -206,7 +206,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 								</button>
 								{/* Button Incorporate */}
 								<button
-									onClick={() => onAddNode("incorporate")}
+									onClick={() => onAddNode?.("incorporate")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -251,7 +251,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 							>
 								{/* Button InputTextNode */}
 								<button
-									onClick={() => onAddNode("inputText")}
+									onClick={() => onAddNode?.("inputText")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -278,7 +278,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputNumberNode */}
 								<button
-									onClick={() => onAddNode("inputNumber")}
+									onClick={() => onAddNode?.("inputNumber")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -305,7 +305,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputEmailNode */}
 								<button
-									onClick={() => onAddNode("inputMail")}
+									onClick={() => onAddNode?.("inputMail")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -332,7 +332,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputPhoneNode */}
 								<button
-									onClick={() => onAddNode("inputPhone")}
+									onClick={() => onAddNode?.("inputPhone")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -359,7 +359,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputImageNode */}
 								<button
-									onClick={() => onAddNode("inputImage")}
+									onClick={() => onAddNode?.("inputImage")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -386,7 +386,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputVideoNode */}
 								<button
-									onClick={() => onAddNode("inputVideo")}
+									onClick={() => onAddNode?.("inputVideo")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -413,7 +413,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputAudioNode */}
 								<button
-									onClick={() => onAddNode("inputAudio")}
+									onClick={() => onAddNode?.("inputAudio")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -440,7 +440,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputArquiveNode */}
 								<button
-									onClick={() => onAddNode("inputArquive")}
+									onClick={() => onAddNode?.("inputArquive")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -467,7 +467,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputDateNode */}
 								<button
-									onClick={() => onAddNode("inputDate")}
+									onClick={() => onAddNode?.("inputDate")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -494,7 +494,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputWebSiteNode */}
 								<button
-									onClick={() => onAddNode("inputLinkWeb")}
+									onClick={() => onAddNode?.("inputLinkWeb")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -521,7 +521,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputPaymentNode */}
 								<button
-									onClick={() => onAddNode("inputPayment")}
+									onClick={() => onAddNode?.("inputPayment")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -548,7 +548,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputButtonsNode */}
 								<button
-									onClick={() => onAddNode("inputButtons")}
+									onClick={() => onAddNode?.("inputButtons")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
@@ -575,7 +575,7 @@ export default function Sidebar({className, onAddNode} : SidebarProps) {
 
 								{/* Button InputAssessmentNode */}
 								<button
-									onClick={() => onAddNode("inputAssessment")}
+									onClick={() => onAddNode?.("inputAssessment")}
 									className={`${
 										!isOpenSidebar
 											? " px-2 flex-1 justify-start gap-1"
